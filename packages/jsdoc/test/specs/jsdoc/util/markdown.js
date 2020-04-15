@@ -134,6 +134,16 @@ describe('jsdoc/util/markdown', () => {
             expect(parser(markdownText)).toBe(convertedText);
         });
 
+        it('should load a plugin if modules is set', () => {
+            let parser;
+
+            setMarkdownConf({modules: [{name: 'markdown-it-anchor',
+                options: {permalink: true}}]});
+            parser = markdown.getParser();
+            console.log(parser('# Hello'));
+            expect(parser('# Hello')).toBe('<h1 id="hello">Hello</h1>');
+        });
+
         describe('syntax highlighter', () => {
             it('should support a `highlight` function defined in the config file', () => {
                 let parser;

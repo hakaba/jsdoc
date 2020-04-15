@@ -140,8 +140,7 @@ describe('jsdoc/util/markdown', () => {
             setMarkdownConf({modules: [{name: 'markdown-it-anchor',
                 options: {permalink: true}}]});
             parser = markdown.getParser();
-            console.log(parser('# Hello'));
-            expect(parser('# Hello')).toBe('<h1 id="hello">Hello</h1>');
+            expect(parser('# Hello')).toBe('<h1 id="hello">Hello <a class="header-anchor" href="#hello">¶</a></h1>');
         });
 
         describe('syntax highlighter', () => {

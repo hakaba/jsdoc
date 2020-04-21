@@ -121,6 +121,16 @@ describe('jsdoc/util/markdown', () => {
             expect(parser('# Hello')).toBe('<h1 id="hello">Hello</h1>');
         });
 
+        it('should load a plugin if modules is set', () => {
+            let parser;
+
+            setMarkdownConf({modules: [{name: 'markdown-it-anchor',
+                options: {permalink: true}}]});
+            parser = markdown.getParser();
+            console.log(parser('# Hello'));
+            expect(parser('# Hello')).toBe('<h1 id="hello">Hello <a class="header-anchor" href="#hello">¶</a></h1>');
+        });
+
         it('should not pretty-print code blocks that start with "```plain"', () => {
             const parser = markdown.getParser();
             const markdownText = '```plain\nconsole.log("foo");\n```';
